@@ -3,19 +3,16 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <vector>
 #include <sstream>
 
-using namespace std;
-
-string convertOutput(mpf_class x, int d)
+std::string convertOutput(mpf_class x, int d)
 {
-	ostringstream ss;
-    	ss << fixed;
-	ss << setprecision(d);
+	std::ostringstream ss;
+    	ss << std::fixed;
+	ss << std::setprecision(d);
 	ss << x;
-	string str = ss.str();
-	string strFormat = str.substr(0, str.find_last_not_of('0') + 1);
+	std::string str = ss.str();
+	std::string strFormat = str.substr(0, str.find_last_not_of('0') + 1);
 	size_t dotPos = strFormat.find(".");
 	if(dotPos == strFormat.length() - 1)
 	{
@@ -40,31 +37,30 @@ int main(int argc, char **argv)
 	{
 		d = 20;
         }
-	cout << "Precyzja \n";
 	double bits_per_digit = 3.32192809488736234789;
 	mpf_set_default_prec((100+d)*bits_per_digit + 1);
-	mpz_class x;
+	mpf_class x;
 	x = 0;
 	mpf_class sum;	
 	sum = 0;
 	mpf_class sumPwr;
 	sumPwr = 0;
 
-	string strX;
+	std::string strX;
 
-	while(cin >> strX)
+	while(std::cin >> strX)
 	{
 		x = strX;
 		sum += x;
 		sumPwr += (x * x);
 		n++;
 	}
-	cout << n << "\n";
+	std::cout << n << "\n";
 	mpf_class avg;
 	mpf_class var;
 	avg = sum / n;
-	cout << convertOutput(avg, d) << "\n";
-	//var = (sumPwr / n) - avg * avg;
-	//cout << convertOutput(var, d) << "\n";
+	std::cout << convertOutput(avg, d) << "\n";
+	var = (sumPwr / n) - avg * avg;
+	std::cout << convertOutput(var, d) << "\n";
 	return 0;
 }
