@@ -47,6 +47,8 @@ int main(int argc, char **argv)
 	x = 0;
 	mpf_class sum;	
 	sum = 0;
+	mpf_class sumPwr;
+	sumPwr = 0;
 
 	string strX;
 
@@ -54,12 +56,15 @@ int main(int argc, char **argv)
 	{
 		x = strX;
 		sum += x;
+		sumPwr += (x * x);
 		n++;
 	}
 	cout << n << "\n";
 	mpf_class avg;
+	mpf_class var;
 	avg = sum / n;
-	cout.setf(std::ios_base::fixed);
 	cout << convertOutput(avg, d) << "\n";
+	//var = (sumPwr / n) - avg * avg;
+	//cout << convertOutput(var, d) << "\n";
 	return 0;
 }
